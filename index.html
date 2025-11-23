@@ -3,70 +3,131 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>School Timetable</title>
+<title>Timetable</title>
 
 <style>
-    /* ---------- Base styling ---------- */
+    :root {
+      --main-green: #4CAF50;
+
+      /* Dark mode defaults */
+      --bg: #1b1f1c;
+      --card-bg: #222723;
+      --text-main: #e8f5e9;
+      --text-secondary: #9e9e9e;
+
+      --cell-bg: #262b27;
+      --cell-bg-alt: #202421;
+      --break-bg: #2f3a32;
+      --wrap-bg: #3a3520;
+    }
+
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg: #f5f5f5;
+        --card-bg: white;
+        --text-main: #1b1f1c;
+        --text-secondary: #555;
+
+        --cell-bg: #ffffff;
+        --cell-bg-alt: #f2f2f2;
+        --break-bg: #e8f5e9;
+        --wrap-bg: #fff4da;
+      }
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #1b1f1c;
+        --card-bg: #222723;
+        --text-main: #e8f5e9;
+        --text-secondary: #9e9e9e;
+
+        --cell-bg: #262b27;
+        --cell-bg-alt: #202421;
+        --break-bg: #2f3a32;
+        --wrap-bg: #3a3520;
+      }
+    }
+
     body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 20px;
-        background: var(--bg);
-        color: var(--text);
+      background: var(--bg);
+      color: var(--text-main);
+      font-family: "JetBrains Mono", Consolas, monospace;
+      margin: 0;
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    h1 {
+      color: var(--main-green);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .timetable {
+      background: var(--card-bg);
+      padding: 25px;
+      border-radius: 18px;
+      box-shadow: 0 0 25px rgba(76, 175, 80, 0.18);
+      transition: all 0.3s ease;
+      overflow-x: auto;
     }
 
     table {
-        width: 100%;
-        border-collapse: collapse;
-        margin: auto;
-        background: var(--table-bg);
-    }
-
-    th, td {
-        border: 1px solid var(--border);
-        padding: 10px;
-        text-align: center;
+      border-collapse: collapse;
+      width: 100%;
+      min-width: 800px;
     }
 
     th {
-        background: var(--header-bg);
-        font-weight: bold;
+      padding: 12px;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: var(--main-green);
+      border-bottom: 2px solid var(--main-green);
+    }
+
+    td {
+      padding: 14px;
+      text-align: center;
+      background: var(--cell-bg);
+      transition: background 0.2s;
+    }
+
+    tr:nth-child(even) td {
+      background: var(--cell-bg-alt);
+    }
+
+    td:hover {
+      background: rgba(76, 175, 80, 0.12);
     }
 
     .section {
-        background: var(--section-bg);
-        font-weight: bold;
-        font-size: 1.1em;
+      background: var(--break-bg) !important;
+      color: var(--main-green);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
     }
 
-    /* ---------- Light mode ---------- */
-    :root {
-        --bg: #ffffff;
-        --text: #000000;
-        --border: #333333;
-        --header-bg: #e6e6e6;
-        --section-bg: #dff0d8;
-        --table-bg: #ffffff;
-    }
-
-    /* ---------- Dark mode ---------- */
-    @media (prefers-color-scheme: dark) {
-        :root {
-            --bg: #121212;
-            --text: #f5f5f5;
-            --border: #555;
-            --header-bg: #1f1f1f;
-            --section-bg: #2b3a30;
-            --table-bg: #1a1a1a;
-        }
+    .wrap {
+      background: var(--wrap-bg) !important;
+      font-weight: 700;
+      color: var(--main-green);
     }
 </style>
 </head>
 
 <body>
 
-<h2 style="text-align:center;">Weekly Timetable</h2>
+<h1>Weekly Timetable</h1>
 
+<div class="timetable">
 <table>
     <tr>
         <th>Time</th>
@@ -140,11 +201,10 @@
     </tr>
 
     <tr>
-        <td colspan="6" class="section" style="background: var(--wrap-bg, #f7eac7);">
-            WRAP UP
-        </td>
+        <td colspan="6" class="wrap">WRAP UP</td>
     </tr>
 </table>
+</div>
 
 </body>
 </html>
